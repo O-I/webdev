@@ -20,11 +20,17 @@
    :body "Written by O-I under the guidance of Eric Normand and his LispCast on web development in Clojure."
    :headers {}})
 
+(defn yo [{:keys [:route-params]}]
+  {:status 200
+   :body (str "Yo, " (:name route-params) "!" )
+   :headers {}})
+
 (defroutes app
-  (GET "/"        [] greet)
-  (GET "/goodbye" [] adieu)
-  (GET "/about"   [] about)
-  (GET "/request" [] handle-dump)
+  (GET "/"         [] greet)
+  (GET "/goodbye"  [] adieu)
+  (GET "/about"    [] about)
+  (GET "/request"  [] handle-dump)
+  (GET "/yo/:name" [] yo)
   (not-found "Page not found."))
 
 (defn -main [port]
