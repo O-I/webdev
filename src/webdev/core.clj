@@ -19,10 +19,16 @@
    :body "Written by O-I under the guidance of Eric Normand and his LispCast on web development in Clojure."
    :headers {}})
 
+(defn request [req]
+  {:status 200
+   :body (pr-str req)
+   :headers {}})
+
 (defroutes app
   (GET "/"        [] greet)
   (GET "/goodbye" [] adieu)
   (GET "/about"   [] about)
+  (GET "/request" [] request)
   (not-found "Page not found."))
 
 (defn -main [port]
