@@ -9,8 +9,14 @@
    :body "Hello, World!"
    :headers {}})
 
+(defn adieu [req]
+  {:status 200
+   :body "Goodbye, Cruel World!"
+   :headers {}})
+
 (defroutes app
   (GET "/" [] greet)
+  (GET "/goodbye" [] adieu)
   (not-found "Page not found."))
 
 (defn -main [port]
