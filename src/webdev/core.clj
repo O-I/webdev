@@ -25,12 +25,24 @@
    :body (str "Yo, " (:name route-params) "!" )
    :headers {}})
 
+(defn calc [req]
+  (let [int1   (Integer. (get-in req [:route-params :int1]))
+        int2   (Integer. (get-in req [:route-params :int2]))
+        op-str (get-in req [:route-params :op])
+        op     (-> (if (= op-str ":") "/" op-str)
+                   symbol resolve)]
+    {:status 200
+     :body (str (op int1 int2))
+     :headers {}}
+    ))
+
 (defroutes app
   (GET "/"         [] greet)
   (GET "/goodbye"  [] adieu)
   (GET "/about"    [] about)
   (GET "/request"  [] handle-dump)
   (GET "/yo/:name" [] yo)
+  (GET "/calc/:int1/:op/:int2" [] calc)
   (not-found "Page not found."))
 
 (defn -main [port]
