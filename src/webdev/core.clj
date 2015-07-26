@@ -14,9 +14,15 @@
    :body "Goodbye, Cruel World!"
    :headers {}})
 
+(defn about [req]
+  {:status 200
+   :body "Written by O-I under the guidance of Eric Normand and his LispCast on web development in Clojure."
+   :headers {}})
+
 (defroutes app
-  (GET "/" [] greet)
+  (GET "/"        [] greet)
   (GET "/goodbye" [] adieu)
+  (GET "/about"   [] about)
   (not-found "Page not found."))
 
 (defn -main [port]
