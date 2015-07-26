@@ -25,16 +25,24 @@
    :body (str "Yo, " (:name route-params) "!" )
    :headers {}})
 
+(def op-str
+  {"+" +
+   "-" -
+   "*" *
+   ":" /})
+
 (defn calc [req]
-  (let [int1   (Integer. (get-in req [:route-params :int1]))
-        int2   (Integer. (get-in req [:route-params :int2]))
-        op-str (get-in req [:route-params :op])
-        op     (-> (if (= op-str ":") "/" op-str)
-                   symbol resolve)]
-    {:status 200
-     :body (str (op int1 int2))
-     :headers {}}
-    ))
+  (let [i  (Integer. (get-in req [:route-params :i]))
+        j  (Integer. (get-in req [:route-params :j]))
+        op (get-in req [:route-params :op])
+        f  (get op-str op)]
+    (if f
+      {:status 200
+       :body (str (f i j))
+       :headers {}}
+      {:status 404
+       :body (str "Unknown operator: " op)
+       :headers {}})))
 
 (defroutes app
   (GET "/"         [] greet)
@@ -42,7 +50,7 @@
   (GET "/about"    [] about)
   (GET "/request"  [] handle-dump)
   (GET "/yo/:name" [] yo)
-  (GET "/calc/:int1/:op/:int2" [] calc)
+  (GET "/calc/:i/:op/:j" [] calc)
   (not-found "Page not found."))
 
 (defn -main [port]
