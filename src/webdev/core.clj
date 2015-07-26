@@ -1,23 +1,22 @@
 (ns webdev.core
   (:require [ring.adapter.jetty :as jetty]
-            [ring.middleware.reload :refer [wrap-reload]]))
+            [ring.middleware.reload :refer [wrap-reload]]
+            [compojure.core :refer [defroutes GET]]
+            [compojure.route :refer [not-found]]))
 
-(defn greet [{:keys [uri] :as req}]
-  (condp = uri
-    "/"        {:status 200
-                :body "Hello, World! - sans reloading!"
-                :headers {}}
-    "/goodbye" {:status 200
-                :body "Goodbye, Cruel World!"
-                :headers {}}
-               {:status 404
-                :body "Not Found"
-                :headers {}}))
+(defn greet [req]
+  {:status 200
+   :body "Hello, World!"
+   :headers {}})
+
+(defroutes app
+  (GET "/" [] greet)
+  (not-found "Page not found."))
 
 (defn -main [port]
-  (jetty/run-jetty greet
+  (jetty/run-jetty app
                    {:port (Integer. port)}))
 
 (defn -dev-main [port]
-  (jetty/run-jetty (wrap-reload #'greet)
+  (jetty/run-jetty (wrap-reload #'app)
                    {:port (Integer. port)}))
