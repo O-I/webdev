@@ -47,7 +47,7 @@
        :body (str "Unknown operator: " op)
        :headers {}})))
 
-(defroutes app
+(defroutes routes
   (GET "/"         [] greet)
   (GET "/goodbye"  [] adieu)
   (GET "/about"    [] about)
@@ -55,6 +55,9 @@
   (GET "/yo/:name" [] yo)
   (GET "/calc/:i/:op/:j" [] calc)
   (not-found "Page not found."))
+
+(defn app
+  routes)
 
 (defn -main [port]
   (items/create-table db)
