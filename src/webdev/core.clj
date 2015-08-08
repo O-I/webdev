@@ -2,6 +2,7 @@
   (:require [webdev.item.model :as items])
   (:require [ring.adapter.jetty :as jetty]
             [ring.middleware.reload :refer [wrap-reload]]
+            [ring.middleware.params :refer [wrap-params]]
             [compojure.core :refer [defroutes ANY GET POST PUT DELETE]]
             [compojure.route :refer [not-found]]
             [ring.handler.dump :refer [handle-dump]]))
@@ -57,7 +58,8 @@
   (not-found "Page not found."))
 
 (defn app
-  routes)
+  (wrap-params
+   routes))
 
 (defn -main [port]
   (items/create-table db)
