@@ -57,7 +57,7 @@
   (GET "/calc/:i/:op/:j" [] calc)
   (not-found "Page not found."))
 
-(defn app
+(def app
   (wrap-params
    routes))
 
