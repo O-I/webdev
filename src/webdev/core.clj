@@ -61,10 +61,15 @@
   (fn [req]
     (hdlr (assoc req :webdev/db db))))
 
+(defn wrap-server [hdlr]
+  (fn [req]
+    (assoc-in (hdlr req) [:headers "Server"] "ljspt")))
+
 (def app
-  (wrap-db
-   (wrap-params
-    routes)))
+  (wrap-server
+   (wrap-db
+    (wrap-params
+     routes))))
 
 (defn -main [port]
   (items/create-table db)
