@@ -53,7 +53,7 @@
   (GET "/"         [] greet)
   (GET "/goodbye"  [] adieu)
   (GET "/about"    [] about)
-  (GET "/request"  [] handle-dump)
+  (ANY "/request"  [] handle-dump)
   (GET "/yo/:name" [] yo)
   (GET "/calc/:i/:op/:j" [] calc)
   ; routes for todo app
