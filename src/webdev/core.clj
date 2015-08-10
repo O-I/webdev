@@ -1,6 +1,7 @@
 (ns webdev.core
   (:require [webdev.item.model :as items]
-            [webdev.item.handler :refer [handle-index-items]])
+            [webdev.item.handler :refer [handle-index-items
+                                         handle-create-item]])
   (:require [ring.adapter.jetty :as jetty]
             [ring.middleware.reload :refer [wrap-reload]]
             [ring.middleware.params :refer [wrap-params]]
@@ -50,14 +51,15 @@
        :headers {}})))
 
 (defroutes routes
-  (GET "/"         [] greet)
-  (GET "/goodbye"  [] adieu)
-  (GET "/about"    [] about)
-  (ANY "/request"  [] handle-dump)
-  (GET "/yo/:name" [] yo)
-  (GET "/calc/:i/:op/:j" [] calc)
+  (GET  "/"         [] greet)
+  (GET  "/goodbye"  [] adieu)
+  (GET  "/about"    [] about)
+  (ANY  "/request"  [] handle-dump)
+  (GET  "/yo/:name" [] yo)
+  (GET  "/calc/:i/:op/:j" [] calc)
   ; routes for todo app
-  (GET "/items"    [] handle-index-items)
+  (GET  "/items"    [] handle-index-items)
+  (POST "/items"    [] handle-create-item)
   (not-found "Page not found."))
 
 (defn wrap-db [hdlr]
