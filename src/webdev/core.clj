@@ -2,7 +2,7 @@
   (:require [webdev.item.model :as items]
             [webdev.item.handler :refer [handle-index-items
                                          handle-create-item
-                                         handle-delete-item])
+                                         handle-delete-item]])
   (:require [ring.adapter.jetty :as jetty]
             [ring.middleware.reload :refer [wrap-reload]]
             [ring.middleware.params :refer [wrap-params]]
