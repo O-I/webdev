@@ -36,7 +36,7 @@
 (defn handle-update-item [req]
   (let [db (:webdev/db req)
         item-id (java.util.UUID/fromString (:item-id (:route-params req)))
-        checked (get-in req (:params "checked"))
+        checked (get-in req [:params "checked"])
         exists? (update-item db item-id (= "true" checked))]
     (if exists?
       {:status 302
