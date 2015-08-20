@@ -1,3 +1,3 @@
 # Introduction to webdev
 
-TODO: write [great documentation](http://jacobian.org/writing/what-to-write/)
+Exercises for the [Web Development in Clojure LispCast](http://www.purelyfunctional.tv/web-dev-in-clojure) by Eric Normand.
