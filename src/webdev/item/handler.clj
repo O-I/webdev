@@ -40,7 +40,7 @@
         exists? (update-item db item-id (= "true" checked))]
     (if exists?
       {:status 302
-       :headers {"Locations" "/items"}
+       :headers {"Location" "/items"}
        :body ""}
       {:status 404
        :body "Item not found"
