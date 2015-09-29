@@ -10,6 +10,17 @@
                  [hiccup "1.0.5"]
                  [org.clojure/java.jdbc "0.4.1"]
                  [postgresql/postgresql "9.1-901-1.jdbc4"]]
+  :plugins [[lein-cljsbuild "1.1.0"]]
+  :cljsbuild {
+    :builds [{
+        ; The path to the top-level ClojureScript source directory:
+        :source-paths ["src-cljs"]
+        ; The standard ClojureScript compiler options:
+        ; (See the ClojureScript compiler documentation for details.)
+        :compiler {
+          :output-to "war/javascripts/main.js"  ; default: target/cljsbuild-main.js
+          :optimizations :whitespace
+          :pretty-print true}}]})
   :min-lein-version "2.0.0"
   :uberjar-name "webdev.jar"
   :main webdev.core
