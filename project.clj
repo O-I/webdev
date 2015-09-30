@@ -20,7 +20,7 @@
         :compiler {
           :output-to "war/javascripts/main.js"  ; default: target/cljsbuild-main.js
           :optimizations :whitespace
-          :pretty-print true}}]})
+          :pretty-print true}}]}
   :min-lein-version "2.0.0"
   :uberjar-name "webdev.jar"
   :main webdev.core
